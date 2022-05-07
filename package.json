@@ -1,0 +1,26 @@
+{
+  "name": "computational-drawing",
+  "version": "1.0.0",
+  "description": "Exercises and ideas from Computational Drawing (Carl Lostritto)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylestew/computational-drawing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kylestew/computational-drawing/issues"
+  },
+  "homepage": "https://github.com/kylestew/computational-drawing#readme",
+  "dependencies": {
+    "canvas-sketch": "^0.7.5"
+  }
+}
