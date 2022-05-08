@@ -23,7 +23,7 @@ const sketch = () => {
       width - padding * 2,
       height - padding * 2
     );
-    mark.points(context, positions);
+    // mark.points(context, positions);
 
     context.lineWidth = 3.0;
     context.lineCap = "round";
@@ -31,9 +31,10 @@ const sketch = () => {
     positions.forEach((position) => {
       context.save();
       context.translate(position[0], position[1]);
-      const pts = squiggle(width / 8, width * 1.6);
+      const pts = squiggle(width / 8, width * 2);
 
-      mark.curveWithPoints(context, pts);
+      // mark.curveWithPoints(context, pts);
+      mark.curveThroughPoints(context, pts, 0.7, true);
 
       context.restore();
     });
