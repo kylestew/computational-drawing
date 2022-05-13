@@ -1,9 +1,11 @@
 const canvasSketch = require("canvas-sketch");
 const { variablyThickLine } = require("../lib/drawing.js");
 const mark = require("../lib/marking.js");
+const { rectGrid } = require("../lib/grid");
+const { chunk } = require("../lib/array");
 
 const settings = {
-  dimensions: [2048, 2048],
+  dimensions: [1080, 1920],
 };
 
 const sketch = () => {
@@ -11,23 +13,35 @@ const sketch = () => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
 
-    context.translate(width / 2, height / 2);
+    const rowCount = 16;
+    const rowHeight = height / (rowCount + 1.1);
+    const vPadding = rowHeight;
+    const hPadding = width / 20;
 
-    context.lineWidth = 1.0;
+    context.translate(hPadding, vPadding);
 
-    const lines = variablyThickLine(
-      [-width / 2, -height / 2],
-      [width / 2, height / 2],
-      [0.15, 0.5, 0.85],
-      600,
-      300
+    const lines = chunk(
+      rectGrid(rowCount, 2, width - hPadding * 2, height - vPadding * 2)
     );
 
-    lines.forEach((line) => {
-      // console.log(line[0], line[1]);
-      mark.line(context, line[0], line[1]);
-    });
-    // mark.curveThroughPoints(context, pts, 0.7, true);
+    context.lineWidth = 1.2;
+    context.lineCap = "round";
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const marks = variablyThickLine(
+        line[0],
+        line[1],
+        [0, 0.25, 0.5, 0.75, 1],
+        rowHeight,
+        i * 16 + 64,
+        i % 2 == 0
+      );
+
+      marks.forEach((line) => {
+        mark.line(context, line[0], line[1]);
+      });
+    }
   };
 };
 
