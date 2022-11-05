@@ -8,6 +8,8 @@ const settings = {
   dimensions: [2048, 2048],
 };
 
+/* https://sighack.com/post/fifteen-ways-to-draw-a-line */
+
 const sketch = () => {
   return ({ context, width, height }) => {
     const makeLines = (rows, cols) => {
